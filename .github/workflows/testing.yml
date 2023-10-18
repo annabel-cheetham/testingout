@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Hello World Workflow
+
+on: [push]
+
+jobs:
+  hello-world:
+    name: Hello World
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello
+        run: echo "Hello, World!"
+
+  list-files:
+    name: List Files
+    runs-on: ubuntu-latest
+    needs: hello-world
+    steps:
+      - name: List All Files
+        run: ls -R
+
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    needs: list-files
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+  # Extension: Clone the repository
+  clone-repo:
+    name: Clone Repository
+    runs-on: ubuntu-latest
+    needs: hello-world
+    steps:
+      - name: Clone Repository
+        run: git clone https://github.com/annabel-cheetham/testingout.git
